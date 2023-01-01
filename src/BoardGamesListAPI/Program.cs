@@ -1,3 +1,6 @@
+using BoardGamesListAPI.Domain;
+using Marten;
+
 namespace BoardGamesListAPI
 {
     public class Program
@@ -12,6 +15,12 @@ namespace BoardGamesListAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddMarten(opt =>
+            {
+                opt.Connection(builder.Configuration.GetConnectionString("postgres"));
+                opt.AutoCreateSchemaObjects = Weasel.Core.AutoCreate.All;
+                opt.RegisterDocumentType<BoardGames>();
+            });
 
             var app = builder.Build();
 
