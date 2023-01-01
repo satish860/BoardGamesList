@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  boardgameslistapi:
+    image: ${DOCKER_REGISTRY-}boardgameslistapi
+    build:
+      context: .
+      dockerfile: src/BoardGamesListAPI/Dockerfile
+  postgres:
+   image: postgres
+   restart: always
+   ports:
+     - "5432:5432"
+   environment:
+       POSTGRES_PASSWORD: manning
+   volumes:
+      - db-data:/var/lib/postgresql/data
+volumes:
+  db-data:
+    driver: local
