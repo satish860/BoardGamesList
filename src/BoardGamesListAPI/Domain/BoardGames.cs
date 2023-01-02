@@ -2,13 +2,13 @@
 {
     public class BoardGames
     {
-        public int Guid { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public int Year_Published { get; set; }
+        public int? Year_Published { get; set; }
 
-        public int Min_player { get; set; }
+        public int? Min_player { get; set; }
 
         public int Max_player { get; set; }
 
@@ -24,7 +24,7 @@
 
         public double ComplexityAverge { get; set; }
 
-        public int OwnedUser { get; set; }
+        public int? OwnedUser { get; set; }
 
         public string[] Mechanics { get; set; }
 

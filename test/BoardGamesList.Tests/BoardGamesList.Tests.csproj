@@ -25,4 +25,13 @@
     <ProjectReference Include="..\..\src\BoardGamesListAPI\BoardGamesListAPI.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="bgg_dataset.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="BoardGameList.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

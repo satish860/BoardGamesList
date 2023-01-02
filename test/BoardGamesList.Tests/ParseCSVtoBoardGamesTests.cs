@@ -12,7 +12,10 @@ namespace BoardGamesList.Tests
         [Fact]
         public void Should_Be_ParseCSVToBoardGame()
         {
-
+            CsvParser parser = new CsvParser();
+            var result = parser.ParseCsvData("bgg_dataset.csv");
+            Assert.True(result.IsSucess);
+            Assert.Equal(20327, result.Value.Count);
         }
 
         [Fact]
@@ -37,7 +40,7 @@ namespace BoardGamesList.Tests
         public void Throw_Validation_error_If_the_File_Is_Not_found()
         {
             CsvParser csvParser = new CsvParser();
-            var result = csvParser.ParseCsvData("somelocation");
+            var result = csvParser.ParseCsvData("BoardGameList1.csv");
             Assert.False(result.IsSucess);
             Assert.Equal("File does not exist in the Location specified", result.Errors);
         }
