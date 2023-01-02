@@ -45,5 +45,35 @@ namespace BoardGamesListAPI.Controllers
                 return Ok(responsedata);
             }
         }
+
+        [HttpPost("create")]
+        public ActionResult Create(BoardGames boardGames)
+        {
+            using (var session = documentStore.LightweightSession())
+            {
+                session.Store(boardGames);
+            }
+            return Ok(boardGames);
+        }
+
+        [HttpPut]
+        public ActionResult Update(BoardGames boardGames)
+        {
+            using (var session = documentStore.LightweightSession())
+            {
+                session.Store(boardGames);
+            }
+            return Ok(boardGames);
+        }
+
+        [HttpDelete]
+        public ActionResult Delete(int id)
+        {
+            using (var session = documentStore.LightweightSession())
+            {
+                session.DeleteWhere<BoardGames>(p=>p.Id==id);
+            }
+            return Ok("Delete Result");
+        }
     }
 }
