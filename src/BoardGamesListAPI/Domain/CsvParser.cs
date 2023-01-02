@@ -47,6 +47,8 @@ namespace BoardGamesListAPI.Domain
                             Year_Published=item.Year_Published
                             
                         };
+                        BoardGame.Mechanics = item.Mechanics.Split(",").ToArray();
+                        BoardGame.Domains = item.Domains.Split(",").ToArray();
                         boardGames.Add(BoardGame);
                     }
                 }

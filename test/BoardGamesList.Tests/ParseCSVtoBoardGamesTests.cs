@@ -21,19 +21,21 @@ namespace BoardGamesList.Tests
         [Fact]
         public void Should_be_ParseCSVAndGetMechanics()
         {
-
+            CsvParser parser = new CsvParser();
+            var result = parser.ParseCsvData("bgg_dataset.csv");
+            Assert.True(result.IsSucess);
+            var value = result.Value.FirstOrDefault();
+            Assert.Contains(value.Mechanics.AsEnumerable(), p => p.Contains("Action Queue"));
         }
 
         [Fact]
         public void Should_Be_Able_to_Parse_Domains()
         {
-
-        }
-
-        [Fact]
-        public void Validate_If_the_Fields_Are_of_correct_Value()
-        {
-
+            CsvParser parser = new CsvParser();
+            var result = parser.ParseCsvData("bgg_dataset.csv");
+            Assert.True(result.IsSucess);
+            var value = result.Value.FirstOrDefault();
+            Assert.Contains(value.Domains.AsEnumerable(), p => p.Contains("Strategy Games"));
         }
 
         [Fact]
