@@ -1,3 +1,4 @@
+using BoardGamesListAPI.Database;
 using BoardGamesListAPI.Domain;
 using Marten;
 
@@ -20,7 +21,7 @@ namespace BoardGamesListAPI
                 opt.Connection(builder.Configuration.GetConnectionString("postgres"));
                 opt.AutoCreateSchemaObjects = Weasel.Core.AutoCreate.All;
                 opt.RegisterDocumentType<BoardGames>();
-            });
+            }).InitializeWith(new SeedData(new CsvParser(), "Data/bgg_dataset.csv"));
 
             var app = builder.Build();
 

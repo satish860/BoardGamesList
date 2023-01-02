@@ -19,6 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Data\bgg_dataset.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Data\BoardGameList.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
