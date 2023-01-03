@@ -1,8 +1,10 @@
 ﻿using BoardGamesListAPI.Domain;
+using BoardGamesListAPI.Validators;
 using Marten;
 using Marten.Pagination;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace BoardGamesListAPI.Controllers
 {
@@ -20,9 +22,9 @@ namespace BoardGamesListAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<RestDTO<List<BoardGames>>>> Get(
             int pageIndex = 1
-            , int pagesize = 10
-            , string sortColumn = "Name",
-             string sortOrder = "ASC")
+            , [Range(1, 100)] int pagesize = 10
+            , [SortColumnValidator(typeof(BoardGames))] string sortColumn = "Name",
+             [RegularExpression("ASC|DESC")] string sortOrder = "ASC")
         {
             using (var session = documentStore.LightweightSession())
             {
@@ -33,7 +35,7 @@ namespace BoardGamesListAPI.Controllers
                 {
                     query.OrderByDescending(p => p.Name);
                 }
-                var dbResult= await query.ToPagedListAsync(pageIndex,pagesize);
+                var dbResult = await query.ToPagedListAsync(pageIndex, pagesize);
 
                 var responsedata = new RestDTO<List<BoardGames>>
                 {
@@ -71,7 +73,7 @@ namespace BoardGamesListAPI.Controllers
         {
             using (var session = documentStore.LightweightSession())
             {
-                session.DeleteWhere<BoardGames>(p=>p.Id==id);
+                session.DeleteWhere<BoardGames>(p => p.Id == id);
             }
             return Ok("Delete Result");
         }

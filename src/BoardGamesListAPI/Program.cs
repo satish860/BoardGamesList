@@ -1,5 +1,6 @@
 using BoardGamesListAPI.Database;
 using BoardGamesListAPI.Domain;
+using BoardGamesListAPI.Validators;
 using Marten;
 
 namespace BoardGamesListAPI
@@ -15,7 +16,10 @@ namespace BoardGamesListAPI
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(option =>
+            {
+                option.ParameterFilter<SortColumnValidatorFilter>();
+            });
             builder.Services.AddMarten(opt =>
             {
                 opt.Connection(builder.Configuration.GetConnectionString("postgres"));
